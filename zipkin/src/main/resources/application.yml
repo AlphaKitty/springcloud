@@ -1,0 +1,23 @@
+server:
+  port: 5555
+# 必须设置 消费者通过服务名称调用服务
+spring:
+  application:
+    name: zipkin
+  zipkin:
+    base-url: http://localhost:5555
+  sleuth:
+    sampler:
+      percentage: 1.0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web:
+#          servlet:
+#            DispatcherServlet: debug

@@ -1,0 +1,27 @@
+Configuration:
+  status: warn
+  monitorInterval: 30
+
+  Properties:
+    Property:
+      - name: log.level.console
+        value: debug
+      - name: log.path
+        value: log
+      - name: project.name
+        value: gateway
+      - name: log.pattern
+        value: "[%d{yyyy-MM-dd HH:mm:ss}] [MXL-GATEWAY] [%p] [%-20.30C.%M] ===> [line %L] %n         %m%n"
+
+  Appenders:
+    Console:
+      name: CONSOLE
+      target: SYSTEM_OUT
+      PatternLayout:
+        pattern: ${log.pattern}
+
+  Loggers:
+    Root:
+      level: debug
+      AppenderRef:
+        - ref: CONSOLE
