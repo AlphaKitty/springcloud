@@ -1,14 +1,11 @@
-#server:
-#  port: 8889
-# 必须设置 消费者通过服务名称调用服务
 spring:
   application:
+    # 必须设置 消费者通过服务名称调用服务
     name: provider
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8888/eureka
-
+  profiles:
+    active: dev
+server:
+  port: 8889
 logging:
   level:
     org:
@@ -16,3 +13,21 @@ logging:
         web:
           servlet:
             DispatcherServlet: debug
+
+---
+#prod
+spring:
+  profiles: prod
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8888/eureka
+
+---
+#dev
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka

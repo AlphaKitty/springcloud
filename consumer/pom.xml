@@ -34,13 +34,17 @@
     </dependencies>
 
     <build>
-        <!-- 这个插件用来打jar包 但会导致同项目的依赖不能正常使用 -->
-        <!--<plugins>-->
-        <!--    <plugin>-->
-        <!--        <groupId>org.springframework.boot</groupId>-->
-        <!--        <artifactId>spring-boot-maven-plugin</artifactId>-->
-        <!--    </plugin>-->
-        <!--</plugins>-->
+        <plugins>
+            <!--加上这个插件之后能打可以执行的jar包 但会替换掉用于被依赖的jar 导致其他子模块引用不到-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 所以要加这个标识 给可直接执行的jar包加一个exec后缀 这样被依赖jar和可执行jar就可以同时存在了 -->
+                <configuration>
+                    <classifier>exec</classifier>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
 </project>

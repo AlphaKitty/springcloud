@@ -1,13 +1,10 @@
-server:
-  port: 8890
-
 spring:
+  profiles:
+    active: dev
   application:
     name: consumer
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8888/eureka
+server:
+  port: 8890
 feign:
   hystrix:
     enabled: true
@@ -21,3 +18,21 @@ logging:
         web:
           servlet:
             DispatcherServlet: debug
+
+---
+#prod
+spring:
+  profiles: prod
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8888/eureka
+
+---
+#dev
+spring:
+  profiles: dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka

@@ -5,14 +5,10 @@ spring:
   application:
     name: zipkin
   zipkin:
-    base-url: http://localhost:5555
+    base-url: http://docker.ip:5555
   sleuth:
     sampler:
       percentage: 1.0
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8888/eureka
 
 #logging:
 #  level:
@@ -21,3 +17,16 @@ eureka:
 #        web:
 #          servlet:
 #            DispatcherServlet: debug
+---
+#prod
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8888/eureka
+
+---
+#dev
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8888/eureka

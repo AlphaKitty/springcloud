@@ -1,16 +1,49 @@
-server:
-  port: 9999
 spring:
+  profiles:
+    active: dev
   application:
     name: gateway
+server:
+  port: 8080
+zuul:
+  # 别名
+  routes:
+    provider: /provider/**
+    consumer: /consumer/**
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          servlet:
+            # 链路追踪log
+            DispatcherServlet: debug
+
+---
+#prod
+spring:
+  profiles: prod
+  zipkin:
+    base-url: http://172.17.0.1:5555
+    # 禁用链路追踪
+    enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.1:8888/eureka
+
+---
+#dev
+spring:
+  profiles: dev
+  zipkin:
+    base-url: http://localhost:5555
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8888/eureka
-zuul:
-  routes:
-    provider: /provider/**
-    consumer: /consumer/**
+
+
 
   # 可以通过zuul.prefix可为所有的映射增加统一的前缀。如: /api。默认情况下，代理会在转发前自动剥离这个前缀。如果需要转发时带上前缀，可以配置: zuul.stripPrefix=false来关闭这个默认行为。例如：
   #zuul.routes.users.path=/myusers/**
@@ -53,16 +86,6 @@ zuul:
   #来源：简书
   #著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
 
-# 链路追踪log
-logging:
-  level:
-    org:
-      springframework:
-        web:
-          servlet:
-            DispatcherServlet: debug
-
-
-# Eureka注册服务UI: http://localhost:8888/
-# Hystrix监控服务UI: http://localhost:8890/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8890%2Fhystrix.stream
-# Zipkin链路追踪服务UI(需要启动单独jar): http://127.0.0.1:9411/
+  # Eureka注册服务UI: http://localhost:8888/
+  # Hystrix监控服务UI: http://localhost:8890/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8890%2Fhystrix.stream
+  # Zipkin链路追踪服务UI(需要启动单独jar): http://127.0.0.1:9411/
