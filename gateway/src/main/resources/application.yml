@@ -6,7 +6,6 @@ spring:
 server:
   port: 8080
 zuul:
-  # 别名
   routes:
     provider: /provider/**
     consumer: /consumer/**
@@ -16,7 +15,6 @@ logging:
       springframework:
         web:
           servlet:
-            # 链路追踪log
             DispatcherServlet: debug
 
 ---
@@ -25,7 +23,6 @@ spring:
   profiles: prod
   zipkin:
     base-url: http://172.17.0.1:5555
-    # 禁用链路追踪
     enabled: false
 eureka:
   client:
@@ -42,50 +39,3 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8888/eureka
-
-
-
-  # 可以通过zuul.prefix可为所有的映射增加统一的前缀。如: /api。默认情况下，代理会在转发前自动剥离这个前缀。如果需要转发时带上前缀，可以配置: zuul.stripPrefix=false来关闭这个默认行为。例如：
-  #zuul.routes.users.path=/myusers/**
-  #zuul.routes.users.stripPrefix=false
-  # 注意： zuul.stripPrefix只会对zuul.prefix的前缀起作用。对于path指定的前缀不会起作用。
-
-
-  #同一个系统中各个服务之间通过Headers来共享信息是没啥问题的，但是如果不想Headers中的一些敏感信息随着HTTP转发泄露出去话，需要在路由配置中指定一个忽略Header的清单。
-  #
-  #默认情况下，Zuul在请求路由时，会过滤HTTP请求头信息中的一些敏感信息，默认的敏感头信息通过zuul.sensitiveHeaders定义，包括Cookie、Set-Cookie、Authorization。配置的sensitiveHeaders可以用逗号分割。
-  #
-  #对指定路由的可以用下面进行配置:
-  #
-  ## 对指定路由开启自定义敏感头
-  #zuul.routes.[route].customSensitiveHeaders=true
-  #zuul.routes.[route].sensitiveHeaders=[这里设置要过滤的敏感头]
-  #设置全局:
-  #
-  #
-  #zuul.sensitiveHeaders=[这里设置要过滤的敏感头]
-  #
-  #作者：CD826
-  #链接：https://www.jianshu.com/p/be5b26a9fa42
-  #来源：简书
-  #著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-  #忽略Header设置
-  #如果每一个路由都需要配置一些额外的敏感Header时，那你可以通过zuul.ignoredHeaders来统一设置需要忽略的Header。如:
-  #
-  #zuul.ignoredHeaders=[这里设置要忽略的Header]
-  #在默认情况下是没有这个配置的，如果项目中引入了Spring Security，那么Spring Security会自动加上这个配置，默认值为: Pragma,Cache-Control,X-Frame-Options,X-Content-Type-Options,X-XSS-Protection,Expries。
-  #
-  #此时，如果还需要使用下游微服务的Spring Security的Header时，可以增加下面的设置:
-  #
-  #
-  #zuul.ignoreSecurityHeaders=false
-  #
-  #作者：CD826
-  #链接：https://www.jianshu.com/p/be5b26a9fa42
-  #来源：简书
-  #著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-  # Eureka注册服务UI: http://localhost:8888/
-  # Hystrix监控服务UI: http://localhost:8890/hystrix/monitor?stream=http%3A%2F%2Flocalhost%3A8890%2Fhystrix.stream
-  # Zipkin链路追踪服务UI(需要启动单独jar): http://127.0.0.1:9411/
