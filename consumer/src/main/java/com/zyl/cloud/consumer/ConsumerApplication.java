@@ -13,14 +13,17 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 // 服务调用 如果要找服务提供者的feignClient 所以要加提供者的包路径 但好像会导致feign因为循环调用集成不了hystrix
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.zyl.cloud.base.api.provider.remote"})
 // Hystrix服务熔断
 @EnableCircuitBreaker
 // Hystrix监控
 @EnableHystrixDashboard
 // 服务注册
 @EnableDiscoveryClient
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {
+		"com.zyl.cloud.consumer.service.mvc",
+		"com.zyl.cloud.base.api.provider.broken"
+})
 public class ConsumerApplication {
 
 	// @Bean

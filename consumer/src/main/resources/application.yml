@@ -23,6 +23,9 @@ logging:
 #prod
 spring:
   profiles: prod
+  zipkin:
+    base-url: http://172.17.0.1:5555
+    enabled: false
 eureka:
   client:
     service-url:
@@ -32,6 +35,9 @@ eureka:
 #dev
 spring:
   profiles: dev
+  zipkin:
+    base-url: http://172.17.0.1:5555
+    enabled: false
 eureka:
   client:
     service-url:

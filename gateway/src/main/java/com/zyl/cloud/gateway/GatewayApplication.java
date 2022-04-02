@@ -3,7 +3,9 @@ package com.zyl.cloud.gateway;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableFeignClients(basePackages = {"com.zyl.cloud.base.api.provider.remote"})
 @EnableZuulProxy
 @SpringBootApplication
 public class GatewayApplication {

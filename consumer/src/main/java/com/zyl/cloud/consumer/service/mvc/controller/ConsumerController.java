@@ -1,12 +1,15 @@
 package com.zyl.cloud.consumer.service.mvc.controller;
 
-import com.zyl.cloud.consumer.service.mvc.remote.FeignRemote;
+import com.zyl.cloud.base.api.provider.remote.ProviderFeignRemote;
+import com.zyl.cloud.base.pojo.App;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 @RestController
 public class ConsumerController {
@@ -16,7 +19,7 @@ public class ConsumerController {
 	@Autowired
 	private LoadBalancerClient loadBalancerClient;
 	@Autowired
-	private FeignRemote feignRemote;
+	private ProviderFeignRemote providerFeignRemote;
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String hello() {
@@ -30,9 +33,9 @@ public class ConsumerController {
 	}
 
 	@RequestMapping(value = "/feign", method = RequestMethod.GET)
-	public String test() {
+	public List<App> test() {
 		// System.out.println(hello);
-		return feignRemote.hello();
+		return providerFeignRemote.listIcons();
 	}
 
 }

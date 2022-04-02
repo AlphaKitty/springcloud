@@ -18,6 +18,14 @@ logging:
 #prod
 spring:
   profiles: prod
+  zipkin:
+    base-url: http://localhost:5555
+    enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://39.107.99.242:3306/tagme?allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&useSSL=false
+    username: zyl
+    password: zyl
 eureka:
   client:
     service-url:
@@ -27,6 +35,14 @@ eureka:
 #dev
 spring:
   profiles: dev
+  zipkin:
+    base-url: http://localhost:5555
+    enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud?allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: root
 eureka:
   client:
     service-url:
