@@ -25,9 +25,12 @@
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <mybatis.version>2.1.0</mybatis.version>
         <mybatis-plus.version>3.2.0</mybatis-plus.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <shiro.version>1.4.0</shiro.version>
+        <mprelation.version>0.0.3.2-RELEASE</mprelation.version>
     </properties>
 
     <dependencyManagement>

@@ -35,7 +35,7 @@ public class ConsumerController {
 	@RequestMapping(value = "/feign", method = RequestMethod.GET)
 	public List<App> test() {
 		// System.out.println(hello);
-		return providerFeignRemote.listIcons();
+		return providerFeignRemote.listIcons(1L);
 	}
 
 }

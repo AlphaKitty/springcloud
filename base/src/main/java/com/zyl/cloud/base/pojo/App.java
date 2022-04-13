@@ -17,6 +17,9 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class App implements Serializable {
 
+	/**
+	 * id
+	 */
 	private Long id;
 
 	/**
@@ -43,5 +46,15 @@ public class App implements Serializable {
 	 * 图标类型 1网络连接 2本地路径
 	 */
 	private Integer type;
+
+	/**
+	 * 关联用户id
+	 */
+	private Long bindUser;
+
+	/**
+	 * 关联mac地址
+	 */
+	private String bindMac;
 
 }
