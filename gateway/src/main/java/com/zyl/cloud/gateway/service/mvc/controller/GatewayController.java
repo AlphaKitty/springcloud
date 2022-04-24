@@ -16,6 +16,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -26,7 +27,10 @@ public class GatewayController {
 	@Autowired
 	private ProviderFeignRemote providerFeignRemote;
 
-	@PostMapping("/user/login")
+	/**
+	 * 登录
+	 */
+	@PostMapping("/login")
 	public Response login(@RequestBody Map<String, Object> map) {
 		Subject subject = SecurityUtils.getSubject();
 		String name = (String) map.get("name");
@@ -58,6 +62,22 @@ public class GatewayController {
 		Subject s = SecurityUtils.getSubject();
 		User user = (User) s.getPrincipal();
 		return ResponseUtil.success(providerFeignRemote.listIcons(user.getId()));
+	}
+
+	@PostMapping("/icon/listDefault")
+	public Response listDefault() {
+		return ResponseUtil.success(providerFeignRemote.listIcons(0L));
+	}
+
+	/**
+	 * 退出
+	 */
+	@PostMapping("/logout")
+	@ResponseBody
+	public Response logout() {
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		return ResponseUtil.success("退出成功");
 	}
 
 }
