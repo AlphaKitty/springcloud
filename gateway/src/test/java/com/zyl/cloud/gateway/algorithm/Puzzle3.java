@@ -19,7 +19,7 @@ public class Puzzle3 {
 
 	public static void main(String[] args) {
 		Puzzle3 puzzle3 = new Puzzle3();
-		System.out.println(puzzle3.toolVersion("OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended"));
+		System.out.println(puzzle3.toolVersion("idea取消debug自动弹出toolwindow"));
 	}
 
 	private int myVersion(String s) {
@@ -125,8 +125,10 @@ public class Puzzle3 {
 			Integer lastIndex = map.get(chars[i]);
 			// 当前字符没有重复记录或者子串开始下标大于该字符上次重复的加入子串
 			if (lastIndex == null || start > lastIndex) {
+				if (i - start + 1 > result) {
+					bestStart = start;
+				}
 				result = Math.max(result, i - start + 1);
-				bestStart = Math.max(start, lastIndex == null ? 0 : lastIndex + 1);
 			} else {
 				start = Math.max(start, lastIndex + 1);
 			}
