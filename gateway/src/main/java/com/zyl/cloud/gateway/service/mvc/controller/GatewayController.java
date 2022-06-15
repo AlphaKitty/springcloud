@@ -14,10 +14,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -53,6 +50,15 @@ public class GatewayController {
 			return ResponseUtil.error("其他错误！", "");
 		}
 
+	}
+
+
+	/**
+	 * 登录
+	 */
+	@GetMapping("/login")
+	public Response vueLogin() {
+		return ResponseUtil.error("需要登录", null);
 	}
 
 	@PostMapping("/icon/list")
